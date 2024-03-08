@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-control">
+    <h1 class="title">Drill a hole here</h1>
+
+
+    <form th:action="@{/hole}" th:method="POST" th:object="${hole}">
+        <div class="form-list">
+
+            <div class="form-item">
+                <select class="select" id="detail" name="detail" th:required="true">
+                    <option value="">Select detail</option>
+                    <option th:each="detail : ${details}"
+                            th:text="${detail.id + '. ' + detail.name}"
+                            th:value="${detail.id}"></option>
+                </select>
+            </div>
+
+                        <span th:if="${hole.getCoordinates().isEmpty()}">
+                            <div class="form-item">
+                                <select id="coordinatesCalculationPattern" name="coordinatesCalculationPattern" class="select">
+                            <option value="Default pattern">Select strategy</option>
+                            <option th:each="pattern : ${patterns}"
+                                    th:value="${pattern.name}"
+                                    th:text="${pattern.name}"></option>
+                        </select>
+                        </div>
+                        </span>
+
+            <script th:src="@{/DetailSelectValueSaver.js}" type="text/javascript"></script>
+            <label>Diameter</label>
+            <div class="form-item">
+                <input class="input" step=".01" th:field="*{diameter}" type="number"/>
+                <span class="input-validation-error" th:errors="*{diameter}"
+                      th:if="${#fields.hasErrors('diameter')}">Hole error</span>
+            </div>
+            <label>Depth</label>
+            <div class="form-item">
+                <input class="input" step=".01" th:field="*{depth}" type="number"/>
+                <span class="input-validation-error" th:errors="*{depth}"
+                      th:if="${#fields.hasErrors('depth')}">Hole error</span>
+            </div>
+            <label>Drill speed entrance</label>
+            <div class="form-item">
+                <input class="input" step=".01" th:field="*{drillSpeedEntrance}" type="number"/>
+                <span class="input-validation-error" th:errors="*{drillSpeedEntrance}"
+                      th:if="${#fields.hasErrors('drillSpeedEntrance')}">Hole error</span>
+            </div>
+            <label>Drill speed exit</label>
+            <div class="form-item">
+                <input class="input" step=".01" th:field="*{drillSpeedExit}" type="number"/>
+                <span class="input-validation-error" th:errors="*{drillSpeedExit}"
+                      th:if="${#fields.hasErrors('drillSpeedExit')}">Hole error</span>
+            </div>
+            <label>Hole angle</label>
+            <div class="form-item">
+                <input class="input" step=".01" th:field="*{holeAngle}" type="number"/>
+                <span class="input-validation-error" th:errors="*{holeAngle}"
+                      th:if="${#fields.hasErrors('holeAngle')}">Hole error</span>
+            </div>
+
+            <button class="button persistence-page__button" id="addCoordinates" name="addCoordinates" type="submit">Add
+                coordinates
+            </button>
+
+            <div class="form-list" th:if="*{coordinates}">
+                <table>
+                    <tr th:each="coordinate, stat: *{coordinates}">
+                        <td class="dynamic-input-table-cell">
+                                        <span class="dynamic-input-validation-error"
+                                              th:errors="*{coordinates[__${stat.index}__].x}"
+                                              th:if="${#fields.hasErrors('*{coordinates[__${stat.index}__].x}')}">Hole error</span>
+                            <input class="input" placeholder="X coordinate"
+                                   step=".01" th:field="*{coordinates[__${stat.index}__].x}" type="number">
+                            <div class="form-item"></div>
+                        </td>
+                        <td class="dynamic-input-table-cell">
+                                        <span class="dynamic-input-validation-error"
+                                              th:errors="*{coordinates[__${stat.index}__].y}"
+                                              th:if="${#fields.hasErrors('*{coordinates[__${stat.index}__].y}')}">Hole error</span>
+                            <input class="input" placeholder="Y coordinate"
+                                   step=".01" th:field="*{coordinates[__${stat.index}__].y}" type="number">
+                            <div class="form-item"></div>
+                        </td>
+                        <td class="dynamic-input-table-cell">
+                            <button class="button" id="removeCoordinates" name="removeCoordinates" th:value="${stat.index}"
+                                    type="submit">Remove coordinates
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+            <input class="button persistence-page__button" type="submit" value="Create"/>
+            <th><a th:href="@{/detail}"> To details list </a></th>
+        </div>
+    </form>
+
+
+</div>
+</body>
+</html>

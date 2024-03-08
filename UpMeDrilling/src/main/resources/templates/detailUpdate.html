@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-control">
+    <h1 class="title">Update your detail here</h1>
+
+    <form th:method="PUT" th:action="@{/detail/update}" th:object="${detail}">
+    <input th:field="*{id}" th:value="${detail.id}" type="hidden"/>
+        <div class="form-list">
+            <h4 th:text=" 'Details\'s id : ' + ${detail.id}"></h4>
+            <label>Name</label>
+            <div class="form-item">
+                <input class="input" placeholder="name" th:field="*{name}" th:value="${detail.name}" type="text"/>
+                <span class="input-validation-error" th:errors="*{name}"
+                      th:if="${#fields.hasErrors('name')}">Detail error</span>
+            </div>
+            <label>Length</label>
+            <div class="form-item">
+                <input class="input" placeholder="length" th:field="*{length}" th:value="${detail.length}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{length}"
+                      th:if="${#fields.hasErrors('length')}">Detail error</span>
+            </div>
+            <label>Width</label>
+            <div class="form-item">
+                <input class="input" placeholder="width" th:field="*{width}" th:value="${detail.width}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{width}"
+                      th:if="${#fields.hasErrors('width')}">Detail error</span>
+            </div>
+            <label>Height</label>
+            <div class="form-item">
+                <input class="input" placeholder="height" th:field="*{height}" th:value="${detail.height}"type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{height}"
+                      th:if="${#fields.hasErrors('height')}">Detail error</span>
+            </div>
+
+            <input class="button persistence-page__button" type="submit" value="Update"/>
+            <th><a th:href="@{/detail}"> To details list </a></th>
+        </div>
+    </form>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+<h1 class="container all-entities-page__title">List of existing holes:</h1>
+<table class="container">
+    <tr>
+        <th class="form-control text-location">id</th>
+        <th></th>
+        <th class="form-control text-location">diameter</th>
+        <th></th>
+        <th class="form-control text-location">depth</th>
+        <th></th>
+        <th class="form-control text-location">drill speed entrance</th>
+        <th></th>
+        <th class="form-control text-location">drill speed exit</th>
+        <th></th>
+        <th class="form-control text-location">hole angle</th>
+        <th></th>
+        <th class="form-control text-location">detail</th>
+        <th></th>
+        <th class="form-control text-location">coordinates</th>
+    </tr>
+    <tr th:each="hole : ${holes}">
+        <td class="form-control" th:text="${hole.id}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.diameter}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.depth}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.drillSpeedEntrance}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.drillSpeedExit}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.holeAngle}"></td>
+        <th></th>
+        <td class="form-control" th:text="${hole.detail.name}"></td>
+        <th></th>
+        <td class="form-control">
+            <ul style="margin-bottom: 0">
+                    <li>
+                        <a href="#" style="text-decoration: none">View coordinates</a>
+                        <ul class="dropdown">
+                            <li th:each="coordinatesInstance : ${hole.coordinates}">
+                                <a style="text-decoration: none"
+                                   th:href="@{/coordinates/update/{id}(id = ${coordinatesInstance.id})}"
+                                   th:text="${'x: ' + coordinatesInstance.x + '; y: ' + coordinatesInstance.y}"
+                                >
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+            </ul>
+        </td>
+
+        <td class="text-location" th:border="white">
+            <form th:action="@{/hole/update/{id}(id = ${hole.id})}" th:method="GET">
+                <input class="table__button" type="submit" value="Edit"/>
+            </form>
+        </td>
+        <th></th>
+        <td th:border="white">
+            <form th:action="@{/hole/{id}(id = ${hole.id})}" th:method="DELETE">
+                <input class="table__button" type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div class="container text-location">
+    <br>
+    <a th:href="@{/detail}"> To details </a><br>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+<div class="form-control">
+    <h1 class="title">Calculator</h1>
+    <form th:action="@{/calculator}" th:method="POST" th:object="${calculator}">
+        <div class="form-list">
+            <div class="form-item">
+                <select class="select" id="a" name="a" th:required="true">
+                    <option value="">1st coordinate</option>
+                    <option th:each="coordinate : ${coordinates}"
+                            th:text="${coordinate}"
+                            th:value="${coordinate}"></option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <select class="select" id="b" name="b" th:required="true">
+                    <option value="">2nd coordinate</option>
+                    <option th:each="coordinate : ${coordinates}"
+                            th:text="${coordinate}"
+                            th:value="${coordinate}"></option>
+                </select>
+            </div>
+            <div class="form-item">
+                <input class="button" name="addition" type="submit" value="+"/>
+                <input class="button" name="subtraction" type="submit" value="-"/>
+                <input class="button" name="multiplication" type="submit" value="*"/>
+                <input class="button" name="division" type="submit" value="/"/>
+            </div>
+            <span th:if="${result != null}">
+                    <h1><p th:text="'result: ' + ${result}"/></h1>
+                </span>
+            <th><a th:href="@{/detail}"> To details list </a></th>
+
+        </div>
+    </form>
+    <script th:src="@{/CalculatorSelectValueSaver.js}" type="text/javascript"></script>
+</div>
+</body>
+</html>

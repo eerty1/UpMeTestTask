@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-control">
+    <h1 class="title">Update your hole here</h1>
+
+    <form th:method="PUT" th:action="@{/hole/update}" th:object="${hole}">
+        <div class="form-list">
+            <h4 th:text=" 'Hole\'s id : ' + ${hole.id}"></h4>
+            <label>Diameter</label>
+            <div class="form-item">
+                <input class="input" placeholder="diameter" th:field="*{diameter}" th:value="${hole.diameter}" type="text"/>
+                <span class="input-validation-error" th:errors="*{diameter}"
+                      th:if="${#fields.hasErrors('diameter')}">Detail error</span>
+            </div>
+            <label>Depth</label>
+            <div class="form-item">
+                <input class="input" placeholder="depth" th:field="*{depth}" th:value="${hole.depth}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{depth}"
+                      th:if="${#fields.hasErrors('depth')}">Detail error</span>
+            </div>
+            <label>DrillSpeedEntrance</label>
+            <div class="form-item">
+                <input class="input" placeholder="drillSpeedEntrance" th:field="*{drillSpeedEntrance}" th:value="${hole.drillSpeedEntrance}"
+                       type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{drillSpeedEntrance}"
+                      th:if="${#fields.hasErrors('drillSpeedEntrance')}">Detail error</span>
+            </div>
+            <label>DrillSpeedExit</label>
+            <div class="form-item">
+                <input class="input" placeholder="height" th:field="*{drillSpeedExit}" th:value="${hole.drillSpeedExit}"type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{drillSpeedExit}"
+                      th:if="${#fields.hasErrors('drillSpeedExit')}">Detail error</span>
+            </div>
+            <label>HoleAngle</label>
+            <div class="form-item">
+                <input class="input" placeholder="holeAngle" th:field="*{holeAngle}" th:value="${hole.holeAngle}"type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{holeAngle}"
+                      th:if="${#fields.hasErrors('holeAngle')}">Detail error</span>
+            </div>
+                <input  th:field="*{detail}" th:value="${hole.detail}"type="hidden" />
+
+            <input class="button persistence-page__button" type="submit" value="Update"/>
+
+            <th><a th:href="@{/hole}"> To holes list </a></th>
+            <th><a th:href="@{/detail}"> To details list </a></th>
+        </div>
+    </form>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-control">
+    <h1 class="title">Create a new detail here</h1>
+
+    <form th:method="POST" th:action="@{/detail}" th:object="${detail}">
+
+        <div class="form-list">
+            <label>Name</label>
+            <div class="form-item">
+                <input class="input"  th:field="*{name}" type="text"/>
+                <span class="input-validation-error" th:errors="*{name}"
+                      th:if="${#fields.hasErrors('name')}">Detail error</span>
+            </div>
+            <label>Length</label>
+            <div class="form-item">
+                <input class="input" th:field="*{length}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{length}"
+                      th:if="${#fields.hasErrors('length')}">Detail error</span>
+            </div>
+            <label>Width</label>
+            <div class="form-item">
+                <input class="input" th:field="*{width}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{width}"
+                      th:if="${#fields.hasErrors('width')}">Detail error</span>
+            </div>
+            <label>Height</label>
+            <div class="form-item">
+                <input class="input" th:field="*{height}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{height}"
+                      th:if="${#fields.hasErrors('height')}">Detail error</span>
+            </div>
+
+            <input class="button persistence-page__button" type="submit" value="Create"/>
+            <th><a th:href="@{/detail}"> To details list </a></th>
+</div>
+</form>
+
+
+</div>
+</body>
+</html>

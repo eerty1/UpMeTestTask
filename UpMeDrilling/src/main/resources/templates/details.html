@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<h1 class="container all-entities-page__title">List of existing details:</h1>
+<table id="details_table" class="container">
+    <tr>
+        <th class="form-control text-location">id</th>
+        <th></th>
+        <th class="form-control text-location">name</th>
+        <th></th>
+        <th class="form-control text-location">length</th>
+        <th></th>
+        <th class="form-control text-location">width</th>
+        <th></th>
+        <th class="form-control text-location">height</th>
+    </tr>
+    <tr th:each="detail : ${details}">
+        <td class="form-control" th:text="${detail.id}"></td>
+        <th></th>
+        <td class="form-control" th:text="${detail.name}"></td>
+        <th></th>
+        <td class="form-control" th:text="${detail.length}"></td>
+        <th></th>
+        <td class="form-control" th:text="${detail.width}"></td>
+        <th></th>
+        <td class="form-control" th:text="${detail.height}"></td>
+        <th></th>
+        <td class="text-location" th:border="white">
+        <form th:action="@{/detail/update/{id}(id = ${detail.id})}" th:method="GET">
+            <input class="table__button" type="submit" value="Edit"/>
+        </form>
+        </td>
+        <th></th>
+        <td th:border="white">
+        <form th:action="@{/detail/{id}(id = ${detail.id})}" th:method="DELETE">
+            <input class="table__button" type="submit" value="Delete"/>
+        </form>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript" th:src="@{/LocalStorageCleaner.js}"></script>
+<div class="container text-location">
+    <br>
+    <a th:href="@{/detail/creation}"> Create a detail </a>
+    <br>
+    <a th:href="@{/hole/creation}"> Drill a hole </a>
+    <br>
+    <a th:href="@{/hole}"> Holes </a>
+    <br>
+    <a th:href="@{/calculator}"> Calculator </a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>UpMeTestTask</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-wrapper">
+    <h1 class="title">Update coordinates here</h1>
+    <form th:method="PUT" th:action="@{/coordinates/update}" th:object="${coordinates}">
+
+        <div class="form-list">
+            <h4 th:text=" 'Coordinate\'s set id : ' + ${coordinates.id}"></h4>
+            <input th:field="*{id}" th:value="${coordinates.id}" type="hidden"/>
+            <label>X coordinate</label>
+            <div class="form-item">
+                <input class="input" th:field="*{x}" th:value="${coordinates.x}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{x}"
+                      th:if="${#fields.hasErrors('x')}">Detail error</span>
+            </div>
+            <label>Y coordinate</label>
+            <div class="form-item">
+                <input class="input" th:field="*{y}" th:value="${coordinates.y}" type="number" step=".01"/>
+                <span class="input-validation-error" th:errors="*{y}"
+                      th:if="${#fields.hasErrors('y')}">Detail error</span>
+            </div>
+
+            <input class="button persistence-page__button" type="submit" value="Update"/>
+
+        </div>
+    </form>
+    <p></p>
+    <form th:action="@{/coordinates/update/{id}(id = ${coordinates.id})}" th:method="DELETE">
+        <input class="button" type="submit" value="Delete"/>
+    </form>
+    <p></p>
+    <th><a th:href="@{/hole}"> To holes list </a></th>
+    <th><a th:href="@{/detail}"> To details list </a></th>
+</div>
+</body>
+</html>

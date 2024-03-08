@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${DU_URL}
+    username: ${DU_USER}
+    password: ${DU_PASS}
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  jpa:
+    generate-ddl: true
+
